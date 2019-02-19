@@ -120,3 +120,176 @@ console.log(typeof temperatura == undefined);
 // um retorna true e outra retorna false. isso quer dizer que, embora
 // os tipos sejam diferentes (null é do tipo object), null e undefined 
 //são tratados de maneira semelhante.
+
+// Aula 10 - Trabalhando com a DOM
+// ao carregar uma página, o browser monta o document object model (DOM),
+// e com ele podemos manipular diversos elementos da página, utilizando
+// javascript. o DOM consiste em uma arvore de objetos que possuem diversos
+// metodos que nos permitem a manipulação da página
+
+/* var conteudo_caixa = document.getElementById("caixa_azul").innerHTML;
+console.log(conteudo_caixa);
+// obtemos um elemento a partir do id
+
+document.getElementById("caixa_amarela").innerHTML = conteudo_caixa;
+// alteração do conteúdo de um elemento da dom
+
+document.getElementById("caixa_amarela").innerHTML = '<h1>' + 'Caixa amarela' + '</h1>';
+// podemos colocar propriedades html com javascript na nossa página
+
+var conteudo = document.getElementById("caixa_azul").innerHTML;
+document.getElementById("caixa_azul").innerHTML = '<h1>' + conteudo + '</h1>'; */
+
+// Aula 11 - Funções
+
+function soma_numeros() {
+    var x = 5;
+    var y = 2;
+    var soma = x + y;
+    console.log(soma);
+}
+// criação de uma função com javascript
+
+soma_numeros();
+// invocação de uma função
+
+function soma_args(num1, num2) {
+    var soma = num1 + num2;
+    return soma;
+}
+console.log(soma_args(20, 35));
+// é interessante utilizar o comando return em uma função
+// para podermos atribuir o valor dela a uma variável ou fazer o que quisermos
+/* 
+var peso = document.getElementById("peso").innerHTML;
+var altura = document.getElementById("altura").innerHTML; */
+
+/* function calc_imc(peso, altura) {
+    var imc = peso / (altura * altura);
+    return imc.toFixed(2);
+}
+
+document.getElementById("imc").innerHTML = calc_imc(peso, altura); */
+
+// Aula 12 - Arrays
+
+var alunos = ["João", "Maria", "José"];
+var num_primos = [ 2, 3, 5, 7, 11, 13];
+// criação de arrays, que, assim como string, também são sequências de caracteres
+
+console.log(alunos.length);
+console.log(num_primos[2]);
+
+var grupos = [ 
+    [ "João" , "Maria" ],
+    [ "Pedro" , "Joana", "André", "Júlio" ],
+    [ "Carolina" , "Helena", "Marcelo" ]
+];
+// criação de uma array multidimensional
+
+console.log(grupos.length);
+console.log(grupos[1]);
+console.log(grupos[1][1]);
+// podemos acessar elementos dentro de arrays dimensionais dessa forma
+
+var cursos = [ "HTML", "Python", "PHP" ];
+cursos.push("Javascript");
+console.log(cursos);  // O console mostrará [ "HTML", "Python", "PHP", "Javascript" ]
+cursos.unshift("Bootstrap");
+console.log(cursos);  // O console mostrará [ "Bootstrap", "HTML", "Python", "PHP", "Javascript" ]
+cursos.pop();
+console.log(cursos);  // O console mostrará [ "Bootstrap", "HTML", "Python", "PHP" ]
+cursos.shift();
+console.log(cursos);  // O console mostrará [ "HTML", "Python", "PHP" ]
+
+// push -> adiciona um elemento ao final da array
+// pop -> retira o ultimo elemento da array
+// shift -> remove um elemento ao início da array
+// unshift -> adiciona o primeiro elemento da array
+
+console.log(alunos.slice(0,3));
+console.log(alunos.slice(-2,));
+// obtendo de um numero x a um numero y de elementos da array
+
+// Aula 13 - Objetos
+
+var funcionario = {
+    'nome': 'Pedro Souza Gomes',
+    'ano_nasc': 1972,
+    'cpf': '111.111.111.11',
+    'cargo': 'Analista de Sistemas'
+}
+
+console.log(funcionario.nome);
+console.log(funcionario.ano_nasc);
+// criação de um objeto e acesso as suas propriedades
+
+funcionario.cargo = 'Desenvolvedor Web';
+console.log(funcionario.cargo);
+
+funcionario.cnh = "12781782917";
+console.log(funcionario.cnh);
+// modificação e criação de uma propriedade de um objeto
+
+var cursos = [
+    {
+        'titulo': 'Aprenda programação em Python 3 com facilidade do zero',
+        'avaliacoes': 680,
+        'alunos': 2300,
+        'categorias': ['programacao', 'tecnologia']
+    },
+
+    {
+        'titulo': 'Aprenda PHP e faça sites dinâmicos',
+        'avaliacoes': 180,
+        'alunos': 350,
+        'categorias': ['desenvolvimento web', 'programacao']
+    },
+
+    {
+        'titulo': 'Excel do Zero ao Avançado',
+        'avaliacoes': 420,
+        'alunos': 1800,
+        'categorias': ['produtividade', 'gestão']
+    }
+    
+];
+// criação de uma array que possui 3 objetos, cada um deles com 4 propriedades
+
+console.log(cursos[1].categorias[0]);
+// acesso à categoria desenvolvimento web do curso de php
+
+// Aula 14 - Metódos dos Objetos
+
+var aluno = {
+    'nome': 'Maria',
+    'sobrenome': 'Pereira',
+    'ano_nasc': 1992,
+    'nome_completo': function() {
+        var nomeCompleto = this.nome + ' ' + this.sobrenome;
+        return nomeCompleto;
+    },
+    'ver_idade': function() {
+        var idade = 2019 - this.ano_nasc;
+        return idade;
+    }
+}
+
+console.log(aluno.nome_completo());
+console.log("A idade é: " + aluno.ver_idade());
+
+// metódos são ações que podem ser aplicadas à objetos, nesse caso
+// criamos a propriedade nome_completo, que é, na verdade, uma função
+// obs: para referenciar o próprio objeto, utilizamos a keyword this,
+// fazemos isso para acessar uma propriedade do objeto
+
+console.log(console);
+// o próprio console.log que utilizamos sempre no curso, envolve um objeto e
+// um metódo, no caso, console e log, respectivamente
+// acima, obtemos todas as propriedades e metódos de console
+
+console.log(typeof document.getElementById("tudo_obj"));
+// o document também é um objeto que contém metódos e propriedades, como dito
+// anteriormente. o metódo getElementById obtém um elemento através do id, 
+// elemento esse que também é um objeto e, por sua vez, também possui metódos
+// e propriedades

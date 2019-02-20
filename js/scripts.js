@@ -288,8 +288,44 @@ console.log(console);
 // um metódo, no caso, console e log, respectivamente
 // acima, obtemos todas as propriedades e metódos de console
 
-console.log(typeof document.getElementById("tudo_obj"));
+// console.log(typeof document.getElementById("tudo_obj"));
 // o document também é um objeto que contém metódos e propriedades, como dito
 // anteriormente. o metódo getElementById obtém um elemento através do id, 
 // elemento esse que também é um objeto e, por sua vez, também possui metódos
 // e propriedades
+
+// Aula 16 - Eventos
+
+// eventos acontecem em determinadas ações feitas pelo usuário, e 
+// servem para deixar a página mais interativa, alguns dele sendo onClick,
+// onChange, etc
+/* document.getElementById("click-me").onclick = function () {
+    alert("Você clicou no botão");
+};
+
+// ao atribuirmos uma função para essa propriedade, o javascript monitora
+// o elemento e, ao detectar um evento onclick, roda o código da função
+// que escrevemos
+
+document.getElementById("hover-me").onmouseover = function () {
+    alert("Você passou com o cursor no botão");
+};
+
+document.getElementById("leave-me").onmouseout = function () {
+    alert("Você saiu com o cursor do botão");
+}; */
+
+document.onkeydown = function() {
+    alert('Você apertou a tecla ' + event.keyCode);
+}
+// o keydown pode ser atribuído à um elemento específico e também ao document,
+// ao ser aplicado ao document, sempre que o usuário teclar algo, a função definida
+// aqui será executada
+
+// os elementos criados pela dom possuem os metodos de evento por padrão, mas inicialmente
+// eles são null. somente ao atribuirmos uma função para eles, como fizemos nos exemplos acima,
+// é que conseguimos fazer as interações que desejamos
+
+function button_clicked() {
+    alert("Você clicou no botão HEHEHE.");
+}

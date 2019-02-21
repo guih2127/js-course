@@ -315,9 +315,9 @@ document.getElementById("leave-me").onmouseout = function () {
     alert("Você saiu com o cursor do botão");
 }; */
 
-document.onkeydown = function() {
+/* document.onkeydown = function() {
     alert('Você apertou a tecla ' + event.keyCode);
-}
+} */
 // o keydown pode ser atribuído à um elemento específico e também ao document,
 // ao ser aplicado ao document, sempre que o usuário teclar algo, a função definida
 // aqui será executada
@@ -329,3 +329,175 @@ document.onkeydown = function() {
 function button_clicked() {
     alert("Você clicou no botão HEHEHE.");
 }
+
+// Aula 17 - Manipulação do CSS
+
+/* document.getElementById("botao_cor").onclick = function() {
+    document.getElementById("botao_cor").style.height = "100px";
+}
+// os objetos gerados pela dom possuem propriedades e, dentre elas, propriedades css,
+// que estão contidas na propriedade style. no exemplo acima trocamos a height do 
+// elemento quando ele for clicado
+
+// nem todas as propriedades css respeitam as regras dos identificadores javascript,
+// então as vezes pode ser necessário obtê-la de outra maneira
+document.getElementById("botao_cor").onclick = function() {
+    this.style["background-color"] = "red";
+    this.style.transform = "translateX(100px)";
+} */
+
+// Aula 18 - Outros metódos getElement
+// podemos obter todos os elementos de uma classe, utilizando getElementByClassName
+/* var exemplo = document.getElementsByClassName("exemplo");
+
+// o getElementbyClassname nos retorna uma array com vários elementos, por isso precisamos
+// selecionar um deles
+
+exemplo[0].innerHTML = "teste1";
+
+console.log(exemplo); */
+/* 
+var exemplo = document.getElementsByTagName("p");
+// podemos também obter todos os elementos que possuem uma certa tag com o 
+// getElementsByTagName. aqui obtemos todos os elementos <p>
+console.log(exemplo);
+ */
+
+// Aula 19 - Loops For e For/In
+// Com os loops podemos alterar varios indices de uma array de forma mais simples
+ 
+for (var a = 0; a < 5; a++) {
+    console.log(a);
+}
+
+var alunos = ['Pedro', 'Maria', 'José', 'João', 'Carlos'];
+
+for (var b = 0; b < alunos.length; b++) {
+    console.log(alunos[b]);
+}
+
+// podemos utilizar o loop for in para percorrer objetos, ja que as propriedades
+// de um objeto nao sao ordenadas e não podemos acessá-las a partir de um index
+
+var carro = {
+    'Ano': 2018,
+    'Modelo': 'Fox',
+    'Cilindradas': '1.8',
+    'Combustível': 'Gasolina'
+}
+
+for (var prop in carro) {
+    console.log( prop + ': ' + carro[prop] );
+}
+
+// então, podemos utilizar um loop para alterar todos os elementos
+// presentes na variável abaixo, que possui os elementos com a classe "exemplo" 
+var elementos = document.getElementsByClassName("exemplo");
+console.log(elementos);   
+
+for (var a = 0; a < elementos.length ; a++) {
+    elementos[a].style.color = "orange";
+    elementos[a].style['font-weight'] = "bold";
+}
+
+// Aula 20 - Loops While e Do/While
+
+var count = 0;
+
+while (count < 5) {
+    console.log(count);
+    count++;
+}
+// exemplo de um loop while
+
+var count2 = 10;
+
+do {
+    console.log(count2);
+    count++;
+} while (count < 5);
+// a diferença quando fazemos um loop do/while é que o comando
+// será executado ao menos uma vez
+
+// Aula 21 - Condicionais (if, else if, else)
+
+var idade = 17;
+
+if (idade < 18) {
+    console.log("Menor de idade");
+}
+else if(idade == 18) {
+    console.log("Tem 18 anos");
+}
+else {
+    console.log("Maior de idade");
+}
+
+var nota = 8;
+var faltas = 4;
+
+if (nota >= 7 && faltas <= 4) {
+    console.log("Aprovado");
+} else {
+    console.log("Reprovado");
+}
+// exemplos de condicionais com o javascript
+
+var nome = "Ivan";
+
+if (nome) {
+    console.log("Nome: "+ nome);
+} else {
+    console.log("Nome não informado");
+}
+// todos os valores tem associados à eles verdadeiro ou falso,
+// por isso podemos fazer uma condicional como essa, elementos do tipo undefined,
+// null, 0, NaN ou "" retornam false. 
+
+// Aula 22 - Alinhamento de loops e condicionais (nesting)
+var socio = false;
+var idade = 25;
+
+if (socio == true || idade >= 65) {
+    console.log('O ingresso é grátis');
+} else {
+    if (idade < 18) {
+        console.log('O ingresso custa: R$ 6,00');
+    } else {
+        console.log('O ingresso custa: R$ 12,00');
+    }
+}
+
+var funcionarios = [  
+    {
+        'nome': 'Carlos Henrique da Silva',
+        'idade': 45,
+        'filhos': ['Mariana Alves da Silva', 'Fernanda Alves da Silva']
+    },
+
+    {
+        'nome': 'Maria Helena Pereira',
+        'idade': 32,
+        'filhos': ['João Pedro Pereira de Souza']
+    },
+
+    {
+        'nome': 'José Feliciano Maia',
+        'idade': 39,
+        'filhos': ['Felipe Ferreira Maia', 'Fábio Ferreira Maia', 'João Ferreira Maia']
+    }
+];
+    
+var list_element = document.getElementById("filhos");
+
+for (var a = 0 ; a < funcionarios.length ; a++) {
+    if (funcionarios[a].filhos) {
+        var lista_filhos = funcionarios[a].filhos;
+        
+        for (var b = 0 ; b < lista_filhos.length ; b++) {
+            list_element.innerHTML += '<li>' + lista_filhos[b] + ' - Filho(a) de ' + funcionarios[a].nome + '</li>';
+        }
+    }
+}
+// alinhamento de loops para percorrer os arrays e soltar uma lista com
+// os dados dos filhos na tela

@@ -488,7 +488,7 @@ var funcionarios = [
     }
 ];
     
-var list_element = document.getElementById("filhos");
+/* var list_element = document.getElementById("filhos");
 
 for (var a = 0 ; a < funcionarios.length ; a++) {
     if (funcionarios[a].filhos) {
@@ -498,6 +498,121 @@ for (var a = 0 ; a < funcionarios.length ; a++) {
             list_element.innerHTML += '<li>' + lista_filhos[b] + ' - Filho(a) de ' + funcionarios[a].nome + '</li>';
         }
     }
-}
+} */
 // alinhamento de loops para percorrer os arrays e soltar uma lista com
 // os dados dos filhos na tela
+
+// Aula 24 - BOM
+
+/* window.onmousemove = function (e) {
+    console.log('Eixo Y: ' + e.pageY);
+    console.log('Eixo X: ' + e.pageX);
+}; */
+// o BOM (browser object model) nos permite acesso à alguns metódos e propriedades
+// relativos ao browser. nesse caso, utilizamos o metodo onmousemove que recebe um evento
+// e sempre que movimentarmos o mouse a mensagem descrita irá aparecer
+// o evento passado também possui propriedades, por exemplo, obtemos a distancia do mouse
+// do eixo X e do eixo Y
+
+/* window.onmousemove = function (e) {
+    if (e.pageY < 5) {
+        alert("Não perca os descontos exclusivos na seção de promoções!");
+    }
+}; */
+
+// exemplo pratico de utilização do pageY
+
+// Aula 26 - Local Storage
+// O Local Storage é uma propriedade do objeto window que pode armazenar dados no computador
+// do usuário. servem para lembrar informações sempre que ele visitar o site. informações
+// como e-mail, preferências, histórico e etc. é importante lembrar de nunca guardar
+// password e informações sensíveis em localStorage
+
+// window.localStorage.setItem("nome", "João");
+// console.log(localStorage["nome"]);
+// criação e acesso de um par de chave e valor no localStorage
+// mesmo apagando a linha que definimos o nome, a informação continua
+// guardada no browser, e continuará mesmo que o fechemos
+
+// window.localStorage.removeItem("nome");
+// remoção de um par de chave e valor do localStorage
+console.log(localStorage["nome"]);
+
+// utilização prática
+/* var caixa = document.getElementById("nome-usuario");
+
+document.getElementById("enviar-nome").onclick = function() {
+    window.localStorage.setItem("nome", caixa.value);
+}
+
+if (localStorage["nome"] != undefined) {
+    caixa.value = localStorage["nome"];
+}
+
+// Aula 26 - Data e Hora
+
+var data_hoje = new Date(2016, 0, 10, 17, 45, 10);
+console.log(data_hoje); */
+
+// podemos passar alguns argumentos para Date(), por exemplo
+// obs: os meses vao de 0 a 11
+// o date também tem vários metódos, como getFullYear, getSeconds, etc
+
+// Aula 27 - Metódos de Tempo
+
+window.setTimeout(function() {
+    console.log("Mensagem");
+}, 3000);
+// com o metódo setTimeout, podemos executar uma função após um certo
+// numero de tempo. no caso, aqui, 3000 ms (3 segundos)
+// esse método recebe dois argumentos: uma função e um tempo
+
+/* document.getElementById("mostrar-loader").onclick = function() {
+    document.getElementById("spinner-loader").style.display = "initial";
+    window.setTimeout(function() {
+        document.getElementById("spinner-loader").style.display = "none";
+    }, 5000)
+}; */
+// exemplo prático com o loader
+
+var count = 0;
+
+var inter = window.setInterval(function () {
+    console.log(count);
+    count++;
+
+    if (count > 10) {
+        window.clearInterval(inter);
+    }
+},1000);
+// com o setInterval podemos chamar a mesma função durante intervalos de tempo
+// determinados. aqui fazemos um contador, printando count na tela a cada segunda
+// e aumentando ele
+// atribuindo essa função a uma variável e utilizando o clearInterval, podemos
+// parar a função em um tempo determinado
+
+var date = new Date ();
+var segundos = date.getSeconds();
+var minutos = date.getMinutes();
+var horas = date.getHours();
+
+var relogio = document.getElementById("relogio");
+
+window.setInterval(function () {
+    segundos++
+    if (segundos == 60) {
+        minutos++;
+        segundos = 0;
+    } 
+    if (minutos == 60) {
+        horas++;
+        minutos = 0;
+    }
+    if (horas == 24) {
+        horas = 0;
+    }
+    segundos = ("0" + segundos).slice(-2);
+    minutos = ("0" + minutos).slice(-2);
+    horas = ("0" + horas).slice(-2);
+    relogio.innerHTML = (horas + ":" + minutos + ":" + segundos);
+}, 1000);

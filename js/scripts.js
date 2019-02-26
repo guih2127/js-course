@@ -560,9 +560,9 @@ console.log(data_hoje); */
 
 // Aula 27 - Metódos de Tempo
 
-window.setTimeout(function() {
+/* window.setTimeout(function() {
     console.log("Mensagem");
-}, 3000);
+}, 3000); */
 // com o metódo setTimeout, podemos executar uma função após um certo
 // numero de tempo. no caso, aqui, 3000 ms (3 segundos)
 // esse método recebe dois argumentos: uma função e um tempo
@@ -575,7 +575,7 @@ window.setTimeout(function() {
 }; */
 // exemplo prático com o loader
 
-var count = 0;
+/* var count = 0;
 
 var inter = window.setInterval(function () {
     console.log(count);
@@ -616,3 +616,147 @@ window.setInterval(function () {
     horas = ("0" + horas).slice(-2);
     relogio.innerHTML = (horas + ":" + minutos + ":" + segundos);
 }, 1000);
+ */
+
+// Aula 28 - Switch
+
+function valor_pedagio (categoria) {
+    switch(categoria) {
+        case '1':
+            return 11.22;
+            break;
+        case '2':
+            return 22.45;
+            break;
+        case '3':
+            return 16.88;
+            break;
+        case '4':
+            return 36.65;
+            break;
+        default:
+            return 'Categoria não encontrada';
+    }
+}
+
+var categoria_veiculo = "3";
+console.log(valor_pedagio(categoria_veiculo));
+// sintaxe switch/case, um pouco mais limpa que o if/else
+// é uma boa opção para trabalhar com apenas uma variável
+
+// Aula 29 - Break e Continue
+
+/* var x = 0;
+
+while (x < 10) {
+    console.log(x);
+    x++;
+
+    if (x == 5) {
+        break;
+    }
+} */
+
+// podemos utilizar o break para interromper um loop
+
+var lista = [1, 5, 9, 33, 56, 89, 100, 122, 145, 189, 190, 199, 205, 290]
+
+for (a = 0; a < lista.length; a++) {
+    if (lista[a] == 33) {
+        console.log("Valor encontrado");
+        break;
+    }
+    console.log("Tentativa: " + a);
+}
+// exemplo mais prático da utilização do break
+
+/* var num = 0;
+
+while (num < 20) {
+    if (num == 3) {
+        num++;
+        continue;
+    }
+    console.log(num);
+    num++;
+}
+// exemplo mais prático da utilização do continue
+
+var num = 0;
+
+while (num < 20) {
+    if (num % 2 == 0) {
+        num++;
+        continue;
+    }
+    console.log(num);
+    num++;
+} */
+
+// Aula 30 - Formulários
+
+// Select Box
+/* document.getElementById("mostrar_opcao").onclick = function () { */
+/*     var campo_select = document.getElementById("options");
+    var indice_selecionado = campo_select.options.selectedIndex;
+    var valor_selecionado = campo_select.options[indice_selecionado].innerHTML;
+    
+    document.getElementById("opcao_selecionada").innerHTML = valor_selecionado; */
+
+/*     var valor_selecionado = document.getElementById("options").value;
+    document.getElementById("opcao_selecionada").innerHTML = valor_selecionado
+}; */
+// função que obtém a opção selecionada pelo usuário, a partir do clique no botão
+// podemos obter o numero do index, o value, o texto em si, dentre outras propriedades
+// que nos ajudam a trabalhar com formulários
+
+// Radio Button
+/* document.getElementById("mostrar_radio").onclick = function () {
+
+    var radio = document.getElementsByName("genero");
+    var radio_selected;
+    
+    for (var a = 0;  a < radio.length; a++) {
+        if (radio[a].checked) {
+            radio_selected = radio[a].value;
+            break;
+        }
+    }
+    
+    document.getElementById("radio_selecionado").innerHTML = radio_selected;
+}; */
+// O RadioButton possui o mesmo Name para as diferentes opções, e funciona de modo que
+// podemos marcar apenas uma delas. a var radio obtem todos os radiobuttons e, a partir disso,
+// podemos fazer um loop e verificar qual radio está marcado, atribuindo este valor
+// a variavel radio_selected. então mostramos radio_selected no id radio_selecionado
+
+// Check Boxes
+/* 
+document.getElementById("mostrar_check").onclick = function () {
+    var check = document.getElementsByName("interesse");
+    document.getElementById("check_selecionado").innerHTML = "";
+
+    for (var b = 0;  b < check.length; b++) {
+        if (check[b].checked) {
+            document.getElementById("check_selecionado").innerHTML += '<li>' + check[b].value + '</li>';
+        }
+    }
+}; */
+// Semelhante ao radio button, obtemos todos os checkboxes a partir do getElementsByTagName
+// e então fazemos um for. a diferença é que mostramos no check_selecionado uma lista
+// de quais estão selecionados, utilizando o <li>
+// para evitar que o innerHTML se repita varias vezes com o mesmo valor, limpamos o valor do check
+// sempre quando o botão é clicado
+
+
+document.getElementById("mostrar_data").onclick = function () {
+
+    var data_select = document.getElementById("data_evento").value;
+    var data_completa = new Date(data_select);
+    document.getElementById("data_selecionada").innerHTML = data_completa;
+};
+
+// obtemos a data a partir do date com id data_evento. a partir disso criamos um objeto
+// Date novo, utilizando data_select como parametro. depois disso soltamos a data_completa
+// no campo abaixo com id data_selecionada
+// ou seja, a partir de um form de data podemos obter todas as informações da data

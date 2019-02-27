@@ -749,14 +749,41 @@ document.getElementById("mostrar_check").onclick = function () {
 // sempre quando o botão é clicado
 
 
-document.getElementById("mostrar_data").onclick = function () {
+/* document.getElementById("mostrar_data").onclick = function () {
 
     var data_select = document.getElementById("data_evento").value;
     var data_completa = new Date(data_select);
     document.getElementById("data_selecionada").innerHTML = data_completa;
-};
+}; */
 
 // obtemos a data a partir do date com id data_evento. a partir disso criamos um objeto
 // Date novo, utilizando data_select como parametro. depois disso soltamos a data_completa
 // no campo abaixo com id data_selecionada
 // ou seja, a partir de um form de data podemos obter todas as informações da data
+
+// Aula 31 - Evento OnChange
+
+/* document.getElementById("escolaridade").onchange = function () {
+    var campo_select = document.getElementById("escolaridade");
+    var indice_selecionado = campo_select.options.selectedIndex;
+    var valor_selecionado = campo_select.options[indice_selecionado].innerHTML;
+    document.getElementById("escolaridade_selecionada").innerHTML = valor_selecionado;
+}; */
+// criamos um evento onChange para o select com id escolaridade. isso quer dizer
+// que sempre que houver alguma mudança nesse elemento, conseguiremos obter o indice e,
+// consequentemente, o valor selecionado
+
+/* var check = document.getElementsByName("lanche");
+
+for (var a = 0;  a < check.length; a++) {
+    check[a].onchange = function () {
+        document.getElementById("check_selecionado").innerHTML = "";
+        for (var b = 0;  b < check.length; b++) {
+            if (check[b].checked) {
+                document.getElementById("check_selecionado").innerHTML += '<li>' + check[b].value + '</li>';
+            }
+        }
+    }  
+} */
+// a diferença com os checkboxes é que criamos um loop e fazemos um onChange para cada
+// elemento com o name "lanche"

@@ -787,3 +787,54 @@ for (var a = 0;  a < check.length; a++) {
 } */
 // a diferença com os checkboxes é que criamos um loop e fazemos um onChange para cada
 // elemento com o name "lanche"
+
+// Aula 34 - jQuery
+
+/* $("#esconder").click(function() {
+    $(".exemplo").css("display", "none");
+}); */
+// com o jQuery fazemos o mesmo que faziamos com o vanilla javascript mas
+// de forma mais simples. aqui, selecionamos o elemento com id esconder,
+// e no seu clique atribuimos uma função que troca o css dos elementos com
+// classe = exemplo para display: none. a sintaxe é um pouco diferente,
+// mas menos verbosa
+
+// porém, o jQuery tem alguns metódos que facilitam, por exemplo, o hide(),
+// equivalente ao display: none.
+/* $("#esconder").click(function() {
+    $(".exemplo").hide();
+});
+
+// Aula 35 - Manipulação do conteúdo HTML
+
+var conteudo_html = $("#paragrafo-html").html();
+console.log(conteudo_html);
+
+var conteudo_texto = $("#paragrafo-text").text();
+console.log(conteudo_texto);
+
+$("#paragrafo-html").html("Mudar conteúdo do parágrafo");
+conteudo_html = $("#paragrafo-html").html();
+console.log(conteudo_html);
+
+// o metódo html() obtém o texto com as tags, como <p> etc. o metódo text()
+// obtém o texto sem as tags. ambos servem para fazer alterações do conteúdo
+
+var url_link = $("#paragrafo-link").attr("href");
+console.log(url_link);
+
+$("#paragrafo-link").attr("href", "http://www.udemy.com");
+url_link = $("#paragrafo-link").attr("href");
+console.log(url_link);
+
+$("#mudar_imagem").click(function() {
+    $("#imagem_js").attr("src", "https://cdn.tutsplus.com/net/uploads/2013/12/managing-async-nodejs-retina-preview.png");
+    $("#mudar_imagem").hide();
+});
+
+// o metódo attr() serve para obter o valor de algum atríbuto html, como "href",
+// "src", "target", etc
+
+$("#paragrafo-empty").html(""); // remove o conteúdo, mas podemos fazer isso com metódos específicos do jQuery
+$("#paragrafo-empty").empty(); // remove o conteúdo, mantendo o elemento
+$("#paragrafo-empty").remove(); // remove o elemento inteiro */

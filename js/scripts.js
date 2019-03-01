@@ -838,3 +838,93 @@ $("#mudar_imagem").click(function() {
 $("#paragrafo-empty").html(""); // remove o conteúdo, mas podemos fazer isso com metódos específicos do jQuery
 $("#paragrafo-empty").empty(); // remove o conteúdo, mantendo o elemento
 $("#paragrafo-empty").remove(); // remove o elemento inteiro */
+
+// Aula 36 - Loop Each
+
+var lista = ["HTML","CSS","Javascript", "jQuery", "PHP"];
+
+$.each(lista, function(indice, valor) {
+    console.log("O elemento de índice [" + indice + "] tem o valor de: " + valor);
+});
+
+// sintaxe do loop each. ele recebe dois parametros: a variavel que queremos iterar
+// (no nosso caso a array lista) e uma função, que também recebe dois parametros,
+// sendo o primeiro o indice, que sera o nome de cada indice no loop e o valor,
+// que sera equivalente ao valor na iteração
+
+var pessoa = {
+    'nome': 'João Pedro',
+    'DN': '20/01/1990',
+    'CPF': '111.111.111-11'
+};
+
+$.each(pessoa, function(chave, valor) {
+    console.log('O elemento de chave [' + chave + '] tem o valor de ' + valor);
+});
+
+// com o loop each, podemos iterar também sobre objetos. então, ao inves de obtemos
+// um número no primeiro argumento da função, obtemos a chave, como por exemplo: 'nome'
+
+/* var interesses = $("#interesses li")
+console.log(interesses);
+
+$.each(interesses, function(indice, valor) {
+    console.log($(valor).text());
+});
+ */
+// Aula 37 - Formulários em jQuery
+
+var conteudo_input = $("#campo_nome").val();
+console.log(conteudo_input);
+// lembrando que tudo em jQuery, praticamente, são metódos, podemos utilizar o metódo
+// val() para obter o valor de um input em um formulário
+
+var valor_selecionado = $('#options').val();
+console.log(valor_selecionado);
+// obtendo o valor de um select box
+
+var texto_selecionado = $('#options').find(":selected").text();
+console.log(texto_selecionado);
+// obtendo o texto de um select box que está selecionado, com o metódo find()
+
+$("#options").change(function () {
+    var texto_selecionado = $('#options').find(":selected").text();
+    console.log(texto_selecionado);
+});
+// obtendo o texto de um select box que está selecionado sempre que a seleção
+// for trocada, com o change
+
+var valor_radio_selecionado = $("input[name='genero']:checked").val();
+console.log(valor_radio_selecionado);
+// radio buttons são inputs separados todos com o mesmo name, assim controlamos o que está selecionado
+// com o jQuery obtémos o input com name = "genero" que estiver selecionado
+
+var texto_selecionado = $('#options').find(":selected").text();
+console.log(texto_selecionado);
+// para obter o texto da opção selecionada, temos que utilizar o metódo find
+
+var texto_radio_selecionado = $("input[name='genero']:checked").parent('span').text();
+console.log(texto_radio_selecionado);
+// porém, para obter o texto, temos que utilizar o metódo parent(), pois o input não possui
+// texto, e sim seu elemento pai, o span
+
+$("input[name='genero']").change(function() {
+    var novo_radio_selecionado = $("input[name='genero']:checked").parent('span').text();;
+    console.log(novo_radio_selecionado);
+});
+// atualizando sempre com o change
+
+$("input[name='interesse']").change(function() {
+    var checkboxes_selecionados = $("input[name='interesse']:checked");
+    var textos = [];
+    
+    $.each(checkboxes_selecionados, function( index, value ) { 
+        textos.push($(value).parent("span").text());
+    });
+    
+    console.log(textos);
+    
+});
+// para obtermos os valores de texto de vários check boxes, fazemos de forma semelhante aos
+// radio buttons. a diferença é que, como vários podem estar selecionados, fazemos um loop
+// e sempre esvaziamos a variável antes do loop acontecer

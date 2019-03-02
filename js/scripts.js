@@ -874,7 +874,7 @@ $.each(interesses, function(indice, valor) {
  */
 // Aula 37 - Formulários em jQuery
 
-var conteudo_input = $("#campo_nome").val();
+/* var conteudo_input = $("#campo_nome").val();
 console.log(conteudo_input);
 // lembrando que tudo em jQuery, praticamente, são metódos, podemos utilizar o metódo
 // val() para obter o valor de um input em um formulário
@@ -895,11 +895,11 @@ $("#options").change(function () {
 // for trocada, com o change
 
 var valor_radio_selecionado = $("input[name='genero']:checked").val();
-console.log(valor_radio_selecionado);
+console.log(valor_radio_selecionado); */
 // radio buttons são inputs separados todos com o mesmo name, assim controlamos o que está selecionado
 // com o jQuery obtémos o input com name = "genero" que estiver selecionado
 
-var texto_selecionado = $('#options').find(":selected").text();
+/* var texto_selecionado = $('#options').find(":selected").text();
 console.log(texto_selecionado);
 // para obter o texto da opção selecionada, temos que utilizar o metódo find
 
@@ -924,7 +924,146 @@ $("input[name='interesse']").change(function() {
     
     console.log(textos);
     
-});
+}); */
 // para obtermos os valores de texto de vários check boxes, fazemos de forma semelhante aos
 // radio buttons. a diferença é que, como vários podem estar selecionados, fazemos um loop
 // e sempre esvaziamos a variável antes do loop acontecer
+
+//Aula 38 - Manipulação de CSS
+
+/* $(".exemplo").css("display", "none");
+// ex. de manipulação de css com jQuery
+
+$(".exemplo").hide();
+// ex. de um metódo do jQuery que faz a mesma coisa (display: none = hide())
+
+$('#adicionar_classe').click(function () {
+    $('#paragrafo-classes').addClass('styling')
+});
+// podemos mudar completamente o estilo de um elemento adicionando uma classe
+// para mudar tantas características de css utilizando o javascript e css seria
+// mais trabalhoso. com o jQuery, podemos simplesmente criar uma classe e adiciona-la
+// ao elemento quando quisermos
+
+$('#remover_classe').click(function () {
+    $('#paragrafo-classes').removeClass('styling')
+});
+// fica mais fácil, também, remover as propriedades, já que é só remover a classe
+
+$('#alternar_classe').click(function () {
+    $('#paragrafo-classes').toggleClass('styling')
+}); */
+// fazendo de uma forma melhor, temos o metódo toggleClass, que checa se a classe já está
+// aplicada ou não, e então remove ou adiciona a classe quando o botão é clicado
+
+// Aula 39 - Eventos
+
+/* $("elemento").on({
+    click: function(){
+        // Código a ser executado no evento click
+    }, 
+
+    mouseenter: function(){
+        // Código a ser executado no evento mouseenter
+    }, 
+
+    mouseleave: function(){
+        // Código a ser executado no evento mouseleave
+    } 
+});
+// temos o elemento .on(), que recebe um objeto como parâmetro, sendo que as duplas
+// de chave e valor são os eventos (click, change, etc)) e as funções que esses eventos
+// irão executar
+
+$("#nome").keyup(function() {
+    if (($("#nome").val())) {
+        $("#confirmar").show();
+    }
+    else {
+        $("#confirmar").hide();
+    }
+}) */
+
+// Aula 40 - Efeitos
+
+/* $("#botao-esconder").click(function () {
+    $(this).hide(1000);
+    $("#texto-escondido").show();
+}); */
+// aqui, passamos um parametro para o metodo hide que nos permite definir
+// em quanto tempo a função será executada. ou seja, o elemento será escondido
+// após 1000 ms (1s). porém, no nosso caso ficou muito ruim, já que o metódo show()
+// chamado na linha de baixo acaba acontecendo antes desse tempo, já que o javascript
+// é uma linguagem assíncrona, fazendo com que vários comandos possam ser executados
+// ao mesmo tempo
+
+// dito isso, podemos passar uma função CALLBACK também como parâmetro para a função
+// hide(), fazendo com que o show() seja chamado apenas depois destes 1000ms (1s)
+// obs: o hide, por exemplo, recebe dois parametros, dessa forma:
+// -> hide(velocidade, callback);
+/* $( "#botao-esconder" ).click(function() {
+    $(this).hide(1000, function(){
+        $("#texto-escondido").show();
+    });
+}); */
+
+/* $("#toggle-tab").click(function() {
+    $("#tab-content").slideToggle(200, function() {
+        $("#toggle-tab").toggleClass("flip");
+    });
+}) */
+// novamente, o toogle é muito importante para nos permitir alternar entre o
+// hide() e o show(), já que ele faz isso automaticamente para nós. isso quer dizer
+// que, ao definirmos um click para o toogle-tab e, a partir disso, um toggle para o 
+// tab content, automaticamente o botão de mostrar e ocultar estará funcionando
+// além disso, o toggleClass também troca e retira a classe de um elemento. utilizamos
+// isso no flip, para fazer o botão alternar em 188 graus dando a impressão de ocultar/exibir
+// para o usuário. o slideToggle serve para darmos um efeito melhor para o toggle
+// existem várias outras variações do toggle, como o fadeToggle, por exemplos
+
+// Aula 41 - Animate
+// podemos também utilizar o metódo animate para ter maior versatilidade nas animações.
+// é necessário um pouco mais de código, mas as vezes pode ser necessário utilizá-lo
+// sintaxe do animate -> $("elemento").animate({propriedade: valor}, velocidade, callback);
+/* $("#animar").click(function() {
+    $("#quadrado").animate({
+        width: "+=20px",
+        height: "+=20px"
+    }, 2000)
+}); */
+
+/* $("#animar").click(function() {
+    $("#quadrado").animate({
+        width: "+=200px",
+    }, 5000);
+
+    $("#quadrado").animate({
+        height: "+=200px",
+    }, 5000);
+}); */
+// obs: NÃO é necessário utilizar funções callback para controlar a execução dos metódos
+// com o animate. o animate, por padrão, executa as animações uma após a outra, fazendo com que,
+// caso seja da nossa vontade ter uma ordem específica para as animações, seja realmente apenas
+// escrever uma após a outra. além disso, praticamente qualquer propriedade css pode ser animada,
+// porém uma exceção são as cores. cores NÃO podem ser animadas com o animate
+// obs: as propriedades devem ser escrita em camelCase, por exemplo: paddingLeft, e não padding-left
+
+// Aula 42 - Metódos em cadeia
+// no jQuery, podemos realizar vários metódos em cadeia no mesmo objeto utilizando um
+// ponto. ou seja, podemos utilizar vários metódos seguidamente utilizando apenas um
+// um comando. isso faz com que a gente não precise selecionar um elemento mais de uma vez,
+// igual fizemos anteriormente
+/* 
+$("#animar").click(function() {
+    $("#quadrado").animate({
+        width: "+=200px",
+    },800).animate({
+        height: "+=200px",
+    },800,function(){
+        $("#quadrado").css("background-color", "green");
+    })
+}); */
+// podemos utilizar diversos metódos em cadeia, como o animate() e o css(). a diferença aqui,
+// é que a edição de cor feita com o css() será feita já no início, pois ela não segue a mesma
+// regra do animate(). se quisessemos fazer com que a cor mudasse no final, teriamos mesmo
+// que utilizar uma função callback

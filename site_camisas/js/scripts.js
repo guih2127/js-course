@@ -133,11 +133,72 @@ $(function(){
     }
     $("#result_embalagem").text(localStorage.getItem("embalagem"));
 
+    function calculaPreco() {
+        if (localStorage.getItem("cor") == "Branca") {
+            if (localStorage.getItem("gola") == "Gola V") {
+                if (localStorage.getItem("estampa") == "Com estampa") {
+                    var precoUnit = camisetas["branca"]["gola_v"]["com_estampa"]["preco_unit"];
+                }
+                else if (localStorage.getItem("estampa") == "Sem Estampa") {
+                    var precoUnit = camisetas["branca"]["gola_v"]["sem_estampa"]["preco_unit"];
+                }
+            }
+            else if (localStorage.getItem("gola") == "Gola Normal") {
+                if (localStorage.getItem("estampa") == "Com estampa") {
+                    var precoUnit = camisetas["branca"]["gola_normal"]["com_estampa"]["preco_unit"];
+                }
+                else if (localStorage.getItem("estampa") == "Sem Estampa") {
+                    var precoUnit = camisetas["branca"]["gola_normal"]["sem_estampa"]["preco_unit"];
+                }
+            }
+        }
+        else if (localStorage.getItem("cor") == "Cor") {
+            if (localStorage.getItem("gola") == "Gola V") {
+                if (localStorage.getItem("estampa") == "Com estampa") {
+                    var precoUnit = camisetas["colorida"]["gola_v"]["com_estampa"]["preco_unit"];
+                }
+                else if (localStorage.getItem("estampa") == "Sem Estampa") {
+                    var precoUnit = camisetas["colorida"]["gola_v"]["sem_estampa"]["preco_unit"];
+                }
+            }
+            else if (localStorage.getItem("gola") == "Gola Normal") {
+                if (localStorage.getItem("estampa") == "Com estampa") {
+                    var precoUnit = camisetas["colorida"]["gola_normal"]["com_estampa"]["preco_unit"];
+                }
+                else if (localStorage.getItem("estampa") == "Sem Estampa") {
+                    var precoUnit = camisetas["colorida"]["gola_normal"]["sem_estampa"]["preco_unit"];
+                }
+            }
+        }
+
+        if (localStorage.getItem("qualidade").includes("190")) {
+            precoUnit += precoUnit * 0.12;
+        }
+
+        if (localStorage.getItem("embalagem").includes("Unitária")) {
+            precoUnit += precoUnit * 0.15;
+        }
+        var precoTotal = localStorage.getItem("quantidade") * precoUnit;
+
+        if (localStorage.getItem("quantidade") > 100 && localStorage.getItem("quantidade") <= 500) {
+            precoTotal -= precoTotal * 0.05;
+        }
+        else if (localStorage.getItem("quantidade") > 500 && localStorage.getItem("quantidade") <= 1000) {
+            precoTotal -= precoTotal * 0.10;
+        }
+        else if (localStorage.getItem("quantidade") > 1000) {
+            precoTotal -= precoTotal * 0.15;
+        }
+
+        $("#preco").text("R$ " + precoTotal.toFixed(2));
+    }
+
 
     // quantidade
     $("#quantidade").change(function() {
         $("#result_quantidade").text(this.value);
         localStorage.setItem("quantidade", this.value);
+        calculaPreco();
     })
 
     // cores
@@ -146,12 +207,14 @@ $(function(){
         $("#colorida").removeClass("selected");
         $("#result_cor").text($("#branca").text());
         localStorage.setItem("cor", $("#branca").text());
+        calculaPreco();
     });
     $("#colorida").click(function() {
         $("#colorida").addClass("selected");
         $("#branca").removeClass("selected");
         $("#result_cor").text($("#colorida").text());
         localStorage.setItem("cor", $("#colorida").text());
+        calculaPreco();
     });
 
     // golas
@@ -160,12 +223,14 @@ $(function(){
         $("#gola_normal").removeClass("selected");
         $("#result_gola").text($("#gola_v").text());
         localStorage.setItem("gola", $("#gola_v").text());
+        calculaPreco();
     });
     $("#gola_normal").click(function() {
         $("#gola_normal").addClass("selected");
         $("#gola_v").removeClass("selected");
         $("#result_gola").text($("#gola_normal").text());
         localStorage.setItem("gola", $("#gola_normal").text());
+        calculaPreco();
     });
 
     // tecido
@@ -174,24 +239,28 @@ $(function(){
         $("#q190").removeClass("selected");
         $("#result_qualidade").text($("#q150").text());
         localStorage.setItem("qualidade", $("#q150").text());
+        calculaPreco();
     });
     $("#q190").click(function() {
         $("#q190").addClass("selected");
         $("#q150").removeClass("selected");
         $("#result_qualidade").text($("#q190").text());
         localStorage.setItem("qualidade", $("#q190").text());
+        calculaPreco();
     });
 
     // estampa
     $("#estampa").change(function() {
         $("#result_estampa").text($("#estampa option:selected").text());
         localStorage.setItem("estampa", $("#estampa option:selected").text());
+        calculaPreco();
     })
 
     // embalagem
     $("#embalagem").change(function() {
         $("#result_embalagem").text($("#embalagem option:selected").text());
         localStorage.setItem("embalagem", $("#embalagem option:selected").text());
+        calculaPreco();
     })
 });
 

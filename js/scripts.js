@@ -1067,3 +1067,41 @@ $("#animar").click(function() {
 // é que a edição de cor feita com o css() será feita já no início, pois ela não segue a mesma
 // regra do animate(). se quisessemos fazer com que a cor mudasse no final, teriamos mesmo
 // que utilizar uma função callback
+
+// Aula - Funções Callback
+// Funções callback são funções passadas como parâmetro para outras funções. Como o javascript
+// é uma linguagem assíncrona, podemos ter problemas com a ordem da execução do código.
+// As funções callback existem para termos um controle maior da ordem de execução
+// das funções, já que uma línguagem assíncrona como o javascript, pode executar vários comandos
+// ao mesmo tempo, fazendo com que as vezes as coisas funcionem de maneira inesperada
+function pegar_usuario(callback){
+    window.setTimeout(function() {
+        var u = {
+            'nome': 'João'
+        };
+
+        callback(u);
+    }, 2000);
+}
+        
+function saudar_usuario(user) {
+    console.log('Olá ' + user.nome + ', como vai?');
+}
+
+pegar_usuario(saudar_usuario);
+// o que fizemos nesse exemplo foi criar uma função que recebe outra função como argumento
+// demos a ela o nome de callback, mas poderia ser outro nome. assim, mesmo com o setTimeOut,
+// a função erá executada apenas depois a da execução da primeira função
+
+// ou então, de outra forma
+pegar_usuario(function(user) {
+    console.log('Olá ' + user.nome + ', como vai?');
+});
+
+// boa parte dos comandos jQuery se baseia em funções callback, por exemplo
+/* $( "#esconder" ).click(function() {
+    $(".exemplo").hide();
+}); */
+
+// o metódo setTimeOut também funciona como uma função Callback
+window.setTimeout(function(){},1000);

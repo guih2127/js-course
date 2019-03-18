@@ -1068,7 +1068,7 @@ $("#animar").click(function() {
 // regra do animate(). se quisessemos fazer com que a cor mudasse no final, teriamos mesmo
 // que utilizar uma função callback
 
-// Aula - Funções Callback
+// Aula 43 - Funções Callback
 // Funções callback são funções passadas como parâmetro para outras funções. Como o javascript
 // é uma linguagem assíncrona, podemos ter problemas com a ordem da execução do código.
 // As funções callback existem para termos um controle maior da ordem de execução
@@ -1105,3 +1105,100 @@ pegar_usuario(function(user) {
 
 // o metódo setTimeOut também funciona como uma função Callback
 window.setTimeout(function(){},1000);
+
+// Aula 44 - Try/Catch/Throw - Lidando com erros
+// as vezes, podemos nos deparar com erros em nosso código que afetarão todo o 
+// javascript da nossa página. para essas situações podemos usar o try/catch
+
+function pegar_usuario(){
+
+    window.setTimeout(function(){
+        var u = {
+            'nome': 'João'
+        };
+        return u;
+    }, 1000);
+    
+}
+        
+function saudar_usuario(user) {
+    console.log('Olá ' + user.nome + ', como vai?');
+}
+
+var user = {nome : ""};
+try {
+    if (user.nome == "") {
+        throw "Nome em branco";
+        // o throw para a execução do programa. ou seja, ele nem irá tentar
+        // executar as funções abaixo. com ele, criamos um erro personalizado
+        //, que será obtido no catch abaixo
+    }
+
+    var user = pegar_usuario();
+    saudar_usuario(user);
+} catch(err) {
+    console.log(err + "  se fodeu");
+    // podemos ter acesso às informações do erro através do parâmetro passado para o catch.
+    // normalmente, esse parâmetro é chamado de err
+}
+
+// Aula 45 - Operador If Ternário
+// condição ? "valor se for verdadeiro" : "valor se for falso";
+
+// Exemplo com if normal:
+var nome = "";
+if (nome) {
+    var mensagem = "Olá " + nome;
+} else {
+    var mensagem = "Nome não informado";
+}
+
+// Exemplo com if ternário:
+nome ? mensagem = "Olá " + nome : mensagem = "Nome não informado";
+
+// Ou ainda mais simples:
+mensagem = nome ? "Olá " + nome : "Nome não informado";
+
+// Aula 46 - Escopo
+function criar_nome() {
+    var nome = 'Maria';
+    console.log(nome); // O console mostrará 'Maria'
+}
+
+criar_nome();
+
+console.log(nome); // Este comando gerará um erro, 
+// pois aqui não temos acesso às variáveis de escopo local da função criar_nome.
+// toda função possui seu escopo local, fazendo com que variáveis definidas dentro
+// dela não possam ser utilizadas globalmente
+
+// se criarmos uma variável sem a keyword VAR, ela SEMPRE será definida como GLOBAL
+// sempre que quisermos uma variável LOCAL, devemos utilizar a keyword VAR
+function criar_nome() {
+    nome = 'Maria';
+    console.log(nome); // O console mostrará 'Maria'
+}
+
+criar_nome();
+
+// outra coisa interessante, é que o objeto window tem como propriedade cada uma
+// das variáveis globais do código. por exemplo:
+console.log(window.nome);
+
+// algo interessante de se dizer é que as variáveis dentro de bloco são globais
+// no javascript. mas podemos mudar isso com o let
+
+for (let a = 0; a < 5; a++) {
+    console.log(a);
+}
+
+// como a variável foi definida apenas localmente, podemos repetir o nome dela
+// novamente em outro loop
+
+for (let a = 0; a < 3; a++) {
+    console.log(a);
+}
+
+// temos também as const, que são utilizadas para variáveis que não irão
+// mudar durante o código
+const PI = "3.14";

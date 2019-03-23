@@ -1202,3 +1202,45 @@ for (let a = 0; a < 3; a++) {
 // temos também as const, que são utilizadas para variáveis que não irão
 // mudar durante o código
 const PI = "3.14";
+
+// Aula 47 - Namespaces
+// Conforme nossa aplicação cresce, podemos ter variáveis com o mesmo nome, ocasionando
+// em problemas para a aplicação, etc. Para contornar isso, utiliza-se o conceito de namespaces,
+// namespaces não estão no javascript, mas podemos simular seu comportamento
+
+var meuWebApp = {
+    'nome': "Felipe",
+
+    'ver_nome': function () {
+        console.log(this.nome);
+    }
+};
+
+meuWebApp.ver_nome();
+// criamos um objeto que serve como um namespace para nossas variáveis e funções.
+
+var meuWebApp = (function() {
+    var nome = "Felipe";
+
+    return {
+        'ver_nome': function() {
+            return nome;
+        },
+        'mudar_nome': function(novo_nome) {
+            nome = novo_nome;
+        },
+        'apagar_nome': function() {
+            nome = null;
+        }
+    }
+})();
+
+console.log(meuWebApp.ver_nome());
+// quanto colocamos o () no final da nossa variável, que é uma função, a função
+// será executada automaticamente
+// nesse caso, criamos um namespace com funções, onde definimos as variáveis,
+// um return e, dentro do return, colocamos as funções que quisermos
+
+// o metódo com objeto utilizado como namespace é mais intuitivo e fácil de usar.
+// o metódo com função permite que a gente proteja melhor as variáveis. por exemplo,
+// nome só poderia ser alterado com a função mudar_nome que criamos.

@@ -1335,3 +1335,155 @@ $.ajax({
 // que será executada caso a requisição seja completada com sucesso (funciona
 // como a função callback do exemplo mostrado anteriormente)
 // além disso, podemos declarar uma função caso a requisição não seja executada
+
+// Folha de Exercícios 05
+function get_paises(callback) {
+    $.ajax({
+        url: "https://restcountries.eu/rest/v2/all",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            callback(data);
+        }
+    })
+}
+
+function populate_dropdown(data) {
+    $.each(data, function (key, value) {
+        $("#paises").append($("<option />").val(key).text(this.name));
+    })
+}
+
+get_paises(populate_dropdown);
+
+var cursos = [
+    {
+        "titulo": "PHP",
+        "aval": []
+    },
+    {
+        "titulo": "Javascript",
+        "aval": [5,5,4.5,4,5,5,5,4.5]
+    },
+    {
+        "titulo": "Python",
+        "aval": [5,5,4,4,5,3,5,4,4,5]
+    },
+    {
+        "titulo": "Machine Learning",
+        "aval": [5,5,4.5]
+    }
+];
+
+function cursos_media(cursos) {
+    console.log(cursos);
+    for (i = 0; i < cursos.length; i++) {
+        try {
+            if (cursos[i].aval.length == 0) {
+                throw "Curso não possui nenhuma avaliação";
+            }
+            else if (cursos[i].aval.length < 5) {
+                throw "Curso não tem avaliações suficientes";
+            }
+            else {
+                var soma = 0;
+                for (j = 0; j < cursos[i].aval.length; j++) {
+                    soma = soma + cursos[i].aval[j];
+                }
+                var media = soma / (cursos[i].aval.length);
+                console.log(media);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+cursos_media(cursos);
+
+var namespace_acessos = (function () {
+    var usuarios = {
+        "33884h": "João Gomes",
+        "43585f": "Maria Luisa",
+        "93661h": "Pedro Henqrique",
+        "23172g": "Paula Carvalho",
+    };
+    
+    var acessos = [
+        {
+            "usuario": "33884h",
+            "data": "10/07/18"
+        },
+        {
+            "usuario": "33884h",
+            "data": "11/07/18"
+        },
+        {
+            "usuario": "3585f",
+            "data": "19/07/18"
+        },
+        {
+            "usuario": "93661h",
+            "data": "24/07/18"
+        },
+        {
+            "usuario": "23172g",
+            "data": "13/08/18"
+        },
+        {
+            "usuario": "93661h",
+            "data": "14/08/18"
+        }
+    ];
+
+    return {
+        'ver_acessos': function() {
+            for (i = 0; i < acessos.length; i++) {
+                $("#acessos").append("<p> Acesso de " +
+                usuarios[acessos[i].usuario]  + " no dia de " + acessos[i].data + "</p>");
+            }
+        }
+    }
+})();
+
+namespace_acessos.ver_acessos();
+
+function get_question (callback) {
+    $.ajax({
+        url: "https://opentdb.com/api.php?amount=10&type=multiple",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            callback(data);
+        }
+    })
+}
+
+function show_question (data) {
+    console.log(data.results[0])
+    $("#question").text((data.results[0].question));
+    var questions = [];
+
+    for (var i = 0; i < data.results[0].incorrect_answers.length; i++) {
+        questions.push(data.results[0].incorrect_answers[i]);
+        console.log(questions)
+    }
+
+    questions.push(data.results[0].correct_answer)
+
+    for (var j = 0; j < questions.length; j++) {
+        $("#question").append('<br/> <input name="answer" type="radio" value=' + j + ' /> <span>' 
+        + questions[j] + '</span>')
+    }
+
+    $("#question input[name='answer']").change(function() {
+        $("#enviar_resposta").show();
+    });
+
+    $("#enviar_resposta").click(function() {
+        
+    })
+}
+
+get_question(show_question);

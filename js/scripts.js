@@ -1244,3 +1244,94 @@ console.log(meuWebApp.ver_nome());
 // o metódo com objeto utilizado como namespace é mais intuitivo e fácil de usar.
 // o metódo com função permite que a gente proteja melhor as variáveis. por exemplo,
 // nome só poderia ser alterado com a função mudar_nome que criamos.
+
+// Aula 48 - JSON
+// json é um formato de armazenamento de dados popular. quase todos os web services atualmente
+// trabalham com este formato e as linguagens de programação mais populares possuem capacidade
+// de importar e exportar dados json
+// ele é bem fácil de aprender, e é derivado do javascript. json significa "javascript object
+// notation".
+
+var funcionario = {
+    'nome': "Fernanda Costa",
+    'd_nascimento': '1988-10-01',
+    'CPF': '111.111.111-11'
+};
+
+var funcionario_json = JSON.stringify(funcionario);
+console.log(typeof funcionario_json)
+console.log(funcionario_json);
+
+// ou seja, o json é um string criado a partir de um objeto ou array javascript.
+// imaginando que tivessemos recebendo esse json de um serviço externo e quisessemos
+// trabalhar com ele, precisariamos convertê-lo de json para um objeto javascript
+
+var funcionario_obj = JSON.parse(funcionario_json);
+console.log(funcionario_obj);
+
+// AJAX - Intro
+// AJAX significa Asynchronous Javascript and XML. Ele funciona em torno do objeto
+// XMLHttpRequest, que através de requisições HTTP, envia ou recebe dados de servidor
+// ou de serviços externos.
+// isso tudo acontece sem que o usuário perceba e sem que a página precise ser 
+// recarregada.
+
+// AJAX - Request
+function mostrar_dados(dados) {
+    var dados_obj = JSON.parse(dados);
+    console.log(dados_obj);
+}
+
+function mostrar_temperatura(dados) {
+    var dados_obj = JSON.parse(dados);
+    console.log("A temperatura em Londres é de " + dados_obj.main.temp + "graus celsius");
+}
+
+function tempo_londres(callback) {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.open("GET", "https://openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22");
+    xhttp.send();
+    // criamos a requisição com um metódo get e a url que queremos fazer a requisição e 
+    // a enviamos com o método send()
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callback(this.responseText);
+        }
+    }
+}
+
+tempo_londres(mostrar_temperatura);
+tempo_londres(mostrar_dados);   
+
+// assim, monitoramos o status do nosso objeto. sempre que ele mudar, verificamos
+// se o state é 4 (resposta recebida) e o status é 200 (não ocoreu problemas)
+
+// criamos uma função que obtém a temperatura de londres e outra para mostrar a temperatura,
+// que converte o json obtido e imprime uma frase na tela.
+
+// utilizamos uma função callback pois as requisições ajax levam um certo tempo (ainda que pouco)
+// para serem concluídas, então, utilizamos o callback e passamos os dados obtidos para a função
+// mostrar_temperatura, assim que a requisição é concluída
+
+// AJAX com jQuery
+$.ajax({
+    url: "https://openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22",
+    type: "GET",
+    dataType: "json",
+    success: function(data) {
+        $("#temp_atual").text(data.main.temp).css("font-weight", "bold");
+        $("#temp_min").text(data.main.temp_min).css("font-weight", "bold");
+        $("#temp_max").text(data.main.temp_max).css("font-weight", "bold");
+    },
+    error: function() {
+        console.log('Erro na requisição')
+    }
+});
+
+// utilizando jQuery, podemos fazer a requisição de forma mais fácil. o metódo .ajax
+// recebe a url, o tipo de requisição, o tipo dos dados a receber e uma função
+// que será executada caso a requisição seja completada com sucesso (funciona
+// como a função callback do exemplo mostrado anteriormente)
+// além disso, podemos declarar uma função caso a requisição não seja executada
